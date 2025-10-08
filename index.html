@@ -1,0 +1,80 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+  <link rel="manifest" href="manifest.json">
+  <link rel="apple-touch-icon" href="icon-192.png">
+  <title>Scribbler Too – Ze-ish</title>
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <header class="topbar">
+    <div class="brand">Scribbler <span class="tag">too</span></div>
+    <div class="controls">
+      <div class="group">
+        <label>Tool</label>
+        <select id="tool">
+          <option value="pen">Pen</option>
+          <option value="scribble">Scribble</option>
+          <option value="marker">Marker</option>
+          <option value="eraser">Eraser</option>
+        </select>
+      </div>
+      <div class="group">
+        <label>Color</label>
+        <input type="color" id="color" value="#ff4d4d">
+      </div>
+      <div class="group">
+        <label>Size</label>
+        <input type="range" id="size" min="1" max="60" value="8">
+      </div>
+      <div class="group">
+        <label>Opacity</label>
+        <input type="range" id="alpha" min="0" max="1" step="0.01" value="1">
+      </div>
+      <div class="group">
+        <label>Symmetry</label>
+        <select id="symmetry">
+          <option value="none">None</option>
+          <option value="mirror">Mirror</option>
+          <option value="radial-4">Kaleido 4</option>
+          <option value="radial-6">Kaleido 6</option>
+          <option value="radial-12">Kaleido 12</option>
+        </select>
+      </div>
+      <button id="undo" title="Undo">↶</button>
+      <button id="redo" title="Redo">↷</button>
+      <button id="clear" title="Clear">✕</button>
+      <button id="save" title="Save PNG">Save</button>
+      <button id="help" title="Help">?</button>
+    </div>
+  </header>
+
+  <main id="stage-wrap">
+    <canvas id="stage"></canvas>
+  </main>
+
+  <dialog id="helpDialog">
+    <h3>How to use</h3>
+    <ul>
+      <li>Draw with your finger, Apple Pencil, or mouse.</li>
+      <li><b>Scribble</b> adds jittered strokes and shape stamps.</li>
+      <li><b>Mirror/Kaleido</b> reflect strokes in real time.</li>
+      <li>Two-finger tap = Undo. Three-finger tap = Redo (iPadOS).</li>
+      <li>Use <b>Save</b> to download a PNG of your art.</li>
+    </ul>
+    <p>Tip: Add to Home Screen for a full-screen app.</p>
+    <button id="closeHelp">Close</button>
+  </dialog>
+
+  <script src="app.js"></script>
+  <script>
+    if ('serviceWorker' in navigator) {
+      window.addEventListener('load', () => navigator.serviceWorker.register('service-worker.js'));
+    }
+  </script>
+</body>
+</html>
